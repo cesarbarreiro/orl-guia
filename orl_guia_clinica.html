@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Clínica ORL — Médicos Generales</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --text3: #6e7681;
+    --blue: #58a6ff;
+    --blue-bg: #0d2044;
+    --green: #3fb950;
+    --green-bg: #0a3320;
+    --amber: #e3b341;
+    --amber-bg: #2d1f00;
+    --red: #f85149;
+    --red-bg: #3d0000;
+    --purple: #bc8cff;
+    --purple-bg: #1e0a3c;
+    --teal: #39d0d0;
+    --teal-bg: #003333;
+    --accent: #58a6ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* TOP NAV */
+  .topnav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,17,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .topnav::-webkit-scrollbar { display: none; }
+  .topnav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px; color: var(--accent);
+    white-space: nowrap; padding-right: 20px; margin-right: 8px;
+    border-right: 1px solid var(--border);
+  }
+  .tab {
+    padding: 14px 16px;
+    cursor: pointer; white-space: nowrap;
+    color: var(--text2); font-size: 13px; font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+  /* LAYOUT */
+  .content { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* SECTION HEADER */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; color: var(--text);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    color: var(--text2); font-size: 14px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--border); padding-bottom: 16px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px; color: var(--text);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 9px; border-radius: 99px;
+    text-transform: uppercase; letter-spacing: .5px;
+  }
+  .badge-blue { background: var(--blue-bg); color: var(--blue); }
+  .badge-green { background: var(--green-bg); color: var(--green); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber); }
+  .badge-red { background: var(--red-bg); color: var(--red); }
+  .badge-purple { background: var(--purple-bg); color: var(--purple); }
+  .badge-teal { background: var(--teal-bg); color: var(--teal); }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* INFO BLOCKS */
+  .info-block {
+    border-radius: 8px; padding: 14px 16px; margin: 12px 0;
+  }
+  .info-block h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .5px; }
+  .info-block.blue { background: var(--blue-bg); border-left: 3px solid var(--blue); }
+  .info-block.blue h4 { color: var(--blue); }
+  .info-block.green { background: var(--green-bg); border-left: 3px solid var(--green); }
+  .info-block.green h4 { color: var(--green); }
+  .info-block.amber { background: var(--amber-bg); border-left: 3px solid var(--amber); }
+  .info-block.amber h4 { color: var(--amber); }
+  .info-block.red { background: var(--red-bg); border-left: 3px solid var(--red); }
+  .info-block.red h4 { color: var(--red); }
+  .info-block.purple { background: var(--purple-bg); border-left: 3px solid var(--purple); }
+  .info-block.purple h4 { color: var(--purple); }
+  .info-block.teal { background: var(--teal-bg); border-left: 3px solid var(--teal); }
+  .info-block.teal h4 { color: var(--teal); }
+
+  p { margin-bottom: 10px; color: var(--text); font-size: 14.5px; }
+  ul, ol { padding-left: 18px; margin-bottom: 10px; }
+  li { margin-bottom: 5px; font-size: 14.5px; color: var(--text); }
+  strong { color: var(--text); font-weight: 600; }
+
+  /* SUBSECTION */
+  .sub-h { font-size: 15px; font-weight: 600; color: var(--accent); margin: 18px 0 8px; }
+
+  /* ALGORITHM */
+  .algo {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 14px 0;
+  }
+  .algo-title {
+    font-size: 13px; font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: .5px;
+    margin-bottom: 14px;
+  }
+  .algo-step {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .step-num {
+    min-width: 26px; height: 26px;
+    background: var(--blue-bg); color: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .step-content { flex: 1; padding-top: 3px; font-size: 14px; }
+  .algo-arrow {
+    text-align: center; color: var(--text3); margin: 2px 0 2px 38px;
+    font-size: 18px;
+  }
+  .decision-box {
+    background: var(--amber-bg); border: 1px solid var(--amber);
+    border-radius: 8px; padding: 10px 14px; margin: 10px 0;
+    font-size: 13.5px; color: var(--amber);
+  }
+  .decision-box strong { color: var(--amber); }
+
+  /* DRUG TABLE */
+  .drug-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13.5px; }
+  .drug-table th {
+    background: var(--bg3); color: var(--text2);
+    padding: 9px 12px; text-align: left; font-weight: 600;
+    border-bottom: 2px solid var(--border);
+    font-size: 12px; text-transform: uppercase; letter-spacing: .4px;
+  }
+  .drug-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .drug-table tr:last-child td { border-bottom: none; }
+  .drug-table tr:hover td { background: var(--bg3); }
+
+  /* COMPARE TABLE */
+  .cmp-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .cmp-table th { padding: 10px 12px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); font-size: 12px; text-transform: uppercase; }
+  .cmp-table td { padding: 9px 12px; border: 1px solid var(--border); vertical-align: top; }
+  .cmp-table tr:first-child th:first-child { border-radius: 8px 0 0 0; }
+  .check { color: var(--green); font-weight: 700; }
+  .cross { color: var(--red); font-weight: 700; }
+
+  /* MANIOBRA */
+  .maniobra-step {
+    display: flex; gap: 14px; margin-bottom: 12px;
+    background: var(--bg3); border-radius: 8px; padding: 12px 14px;
+  }
+  .man-num {
+    min-width: 30px; height: 30px;
+    background: var(--purple-bg); color: var(--purple);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+  }
+  .man-text { flex: 1; font-size: 14px; padding-top: 4px; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+
+  /* EXPANDER */
+  details { margin-bottom: 10px; }
+  summary {
+    cursor: pointer; padding: 11px 14px;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; font-size: 14px; font-weight: 500;
+    list-style: none; display: flex; align-items: center; justify-content: space-between;
+    transition: background .15s;
+  }
+  summary:hover { background: var(--border); }
+  summary::after { content: '▼'; font-size: 11px; color: var(--text3); transition: transform .2s; }
+  details[open] summary { border-radius: 8px 8px 0 0; }
+  details[open] summary::after { transform: rotate(180deg); }
+  .details-body {
+    border: 1px solid var(--border); border-top: none;
+    border-radius: 0 0 8px 8px; padding: 14px;
+    background: var(--bg2);
+  }
+
+  /* ALERT */
+  .alert {
+    padding: 12px 16px; border-radius: 8px; margin: 12px 0; font-size: 14px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert.danger { background: var(--red-bg); border: 1px solid var(--red); color: var(--red); }
+  .alert.warning { background: var(--amber-bg); border: 1px solid var(--amber); color: var(--amber); }
+  .alert.info { background: var(--blue-bg); border: 1px solid var(--blue); color: var(--blue); }
+  .alert.success { background: var(--green-bg); border: 1px solid var(--green); color: var(--green); }
+
+  /* QUICK REF */
+  .qref {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0;
+  }
+  .qref-item {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 11px; font-size: 13px;
+  }
+  .qref-item span { color: var(--text2); font-size: 12px; }
+
+  /* NISTAGMO KEY */
+  .nist-row { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+  .nist-label { min-width: 110px; font-size: 13px; color: var(--text2); font-weight: 500; }
+  .nist-val { font-size: 13.5px; }
+
+  h2 { font-family: 'DM Serif Display', serif; font-size: 21px; margin: 24px 0 12px; color: var(--text); }
+  h3 { font-size: 16px; font-weight: 600; margin: 18px 0 8px; color: var(--text); }
+  code { background: var(--bg3); padding: 1px 6px; border-radius: 4px; font-size: 13px; color: var(--amber); font-family: monospace; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-logo">ORL 🩺</div>
+  <div class="tab active" onclick="showTab('oido')">Oído</div>
+  <div class="tab" onclick="showTab('vertigo')">Vértigo</div>
+  <div class="tab" onclick="showTab('hipoacusia')">Hipoacusia</div>
+  <div class="tab" onclick="showTab('nariz')">Nariz / Senos</div>
+  <div class="tab" onclick="showTab('faringe')">Faringe</div>
+  <div class="tab" onclick="showTab('laringe')">Laringe</div>
+  <div class="tab" onclick="showTab('maniobras')">Maniobras</div>
+  <div class="tab" onclick="showTab('algoritmos')">Algoritmos</div>
+</nav>
+
+<div class="content">
+
+<!-- ========================= OÍDO ========================= -->
+<div id="oido" class="section active">
+  <div class="section-title">Patología del Oído</div>
+  <div class="section-sub">Otitis externa · OMA · OME · OMC · Exploración</div>
+
+  <div class="card">
+    <div class="card-title">Cómo hacer la Otoscopía <span class="badge badge-teal">Exploración</span></div>
+    <p>El examen otoscópico es <strong>fundamental</strong> para el diagnóstico de toda la patología del oído. Observa sistemáticamente:</p>
+    <div class="grid2">
+      <div class="info-block teal">
+        <h4>Qué evaluar en la membrana timpánica</h4>
+        <ul>
+          <li><strong>Color:</strong> normal = gris perla, translúcida</li>
+          <li><strong>Abombamiento:</strong> presente → OMA</li>
+          <li><strong>Opacidad:</strong> presente → OME</li>
+          <li><strong>Triángulo luminoso:</strong> ausente = patología</li>
+          <li><strong>Nivel hidroaéreo o burbujas</strong> → OME</li>
+          <li><strong>Perforación:</strong> central = OMC simple / marginal = colesteatoma</li>
+          <li><strong>Retracción:</strong> hacia medial → disfunción tubaria</li>
+          <li><strong>Vesículas:</strong> OMA bullosa (miringitis)</li>
+          <li><strong>Pars flácida vs pars tensa:</strong> buscar bolsas de retracción</li>
+        </ul>
+      </div>
+      <div class="info-block blue">
+        <h4>Técnica correcta</h4>
+        <ol>
+          <li>Tracción posterior y superior del pabellón auricular (adultos) — posterior e inferior en niños</li>
+          <li>Introducir el espéculo con suavidad</li>
+          <li>Identificar el mango del martillo (orientación)</li>
+          <li>Buscar el triángulo luminoso (antero-inferior)</li>
+          <li>Otoscopía neumática: insuflar aire — movilidad normal vs. disminuida (OME)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTITIS EXTERNA -->
+  <div class="card">
+    <div class="card-title">Otitis Externa <span class="badge badge-blue">Oído externo</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>Inflamación del conducto auditivo externo (CAE). La causa más frecuente es bacteriana (<em>Pseudomonas aeruginosa</em> y <em>S. aureus</em>). El trauma local o la humedad excesiva ("oído del nadador") rompen la barrera epitelial, permitiendo infección. En diabéticos o inmunosuprimidos puede progresar a otitis externa <strong>maligna o necrotizante</strong> (extensión al hueso).</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Manifestaciones clínicas</div>
+        <ul>
+          <li><strong>Otalgia intensa</strong> que aumenta al traccionar el pabellón o presionar el trago (signo patognomónico)</li>
+          <li>Otorrea</li>
+          <li>CAE eritematoso, edematoso, con secreción</li>
+          <li>Hipoacusia leve (si hay oclusión del CAE)</li>
+          <li>Membrana timpánica normal (si se puede ver)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">Diagnóstico diferencial</div>
+        <ul>
+          <li>OMA con perforación → la otalgia es menos exacerbada por tracción del pabellón</li>
+          <li>Forúnculo del CAE → colección localizada</li>
+          <li>Dermatitis del CAE → sin fiebre, prurito predominante</li>
+          <li>Pericondritis → afecta el cartílago del pabellón</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-h">Tratamiento</div>
+    <div class="algo">
+      <div class="algo-title">Algoritmo de tratamiento — Otitis Externa</div>
+      <div class="algo-step"><div class="step-num">1</div><div class="step-content"><strong>Limpieza del CAE</strong> — aspirar o limpiar con mota de algodón. Nunca irrigar si hay perforación timpánica.</div></div>
+      <div class="algo-arrow">↓</div>
+      <div class="algo-step"><div class="step-num">2</div><div class="step-content"><strong>Gotas óticas</strong> con antibiótico + corticoide tópico (ciprofloxacino + dexametasona) 3–4 gotas en el oído afectado cada 12 h × 7–10 días.</div></div>
+      <div class="algo-arrow">↓</div>
+      <div class="decision-box"><strong>¿Edema grave que cierra el CAE?</strong> → Insertar mecha (Merocell) para vehiculizar las gotas.</div>
+      <div class="algo-arrow">↓</div>
+      <div class="algo-step"><div class="step-num">3</div><div class="step-content"><strong>Analgesia:</strong> paracetamol 1 g/8h o ibuprofeno 400 mg/8h en adultos. Evitar agua en el oído.</div></div>
+      <div class="algo-arrow">↓</div>
+      <div class="decision-box"><strong>¿Diabético, inmunosuprimido, fiebre, parálisis facial, trismus?</strong> → <span style="color:var(--red)">Derivar urgente. Sospecha OE maligna (necrotizante). TC temporal + hospitalización + ATB sistémico IV (piperacilina/tazobactam o ciprofloxacino IV).</span></div>
+    </div>
+  </div>
+
+  <!-- OMA -->
+  <div class="card">
+    <div class="card-title">Otitis Media Aguda (OMA) <span class="badge badge-amber">Urgente</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>La OMA comienza generalmente con una IVRS viral que produce inflamación y disfunción de la trompa de Eustaquio. La presión negativa resultante arrastra bacterias desde la nasofaringe hacia el oído medio. Gérmenes más frecuentes:</p>
+    <div class="qref">
+      <div class="qref-item">1° <em>S. pneumoniae</em> <span>(~30-40%)</span></div>
+      <div class="qref-item">2° <em>H. influenzae</em> <span>(~25%)</span></div>
+      <div class="qref-item">3° <em>M. catarrhalis</em> <span>(~10-15%)</span></div>
+      <div class="qref-item"><em>S. pyogenes</em> <span>(&lt;5%, más severo)</span></div>
+      <div class="qref-item">Virus respiratorios <span>(co-infección frecuente)</span></div>
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Manifestaciones clínicas</div>
+        <ul>
+          <li><strong>Otalgia de inicio súbito</strong> (síntoma principal)</li>
+          <li>Fiebre</li>
+          <li>Hipoacusia (síntoma más tardío)</li>
+          <li>Otorrea pulsátil (si hay perforación espontánea → cede el dolor)</li>
+          <li>En lactantes: tironeo del oído, irritabilidad, llanto, fiebre</li>
+          <li>Náuseas, vómitos, diarrea (síntomas acompañantes)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">Otoscopía en OMA</div>
+        <ul>
+          <li>Membrana <strong>abombada</strong> (criterio clave)</li>
+          <li>Membrana <strong>hiperemia / congestiva</strong></li>
+          <li>Efusión detrás de la membrana</li>
+          <li>Ocasionalmente <strong>vesículas</strong> (OMA bullosa)</li>
+          <li>Triángulo luminoso ausente</li>
+          <li>Otorrea pulsátil si hay perforación</li>
+        </ul>
+        <div class="alert warning"><div class="alert-icon">⚠️</div><div><strong>Diagnóstico AAP:</strong> Requiere abombamiento moderado a severo o abombamiento leve + otalgia ≤48h o eritema intenso. NO diagnosticar OMA sin efusión.</div></div>
+      </div>
+    </div>
+    <div class="sub-h">Criterios de severidad en OMA</div>
+    <div class="info-block red">
+      <h4>Signos de OMA severa (requieren ATB inmediato)</h4>
+      <ul>
+        <li>Aspecto tóxico</li>
+        <li>Otalgia moderada a severa</li>
+        <li>Otalgia ≥48 h de evolución</li>
+        <li>Fiebre ≥39°C en las últimas 48 h</li>
+      </ul>
+    </div>
+    <div class="sub-h">¿Cuándo iniciar antibióticos?</div>
+    <table class="drug-table">
+      <tr><th>Situación</th><th>Conducta</th></tr>
+      <tr><td>OMA en niño &lt;6 meses</td><td>ATB siempre</td></tr>
+      <tr><td>OMA severa (uni o bilateral)</td><td>ATB siempre</td></tr>
+      <tr><td>OMA bilateral en &lt;2 años (sin severidad)</td><td>ATB siempre</td></tr>
+      <tr><td>OMA unilateral no severa, 6–23 meses</td><td>ATB o observación (con seguimiento)</td></tr>
+      <tr><td>OMA no severa ≥2 años</td><td>ATB o observación (con seguimiento)</td></tr>
+    </table>
+    <div class="sub-h">Dosificación de antibióticos</div>
+    <table class="drug-table">
+      <tr><th>Antibiótico</th><th>Indicación</th><th>Dosis</th></tr>
+      <tr><td><strong>Amoxicilina</strong></td><td>Primera línea</td><td><strong>Niños:</strong> 80–90 mg/kg/día VO en 2 dosis<br><strong>Adultos:</strong> 500 mg c/8h o 1g c/12h</td></tr>
+      <tr><td><strong>Amoxicilina-Clavulánico</strong> (14:1)</td><td>ATB previos 30 días; conjuntivitis concomitante; OMAR resistente; falla terapéutica</td><td><strong>Niños:</strong> 90 mg/kg/día de amoxicilina + 6.4 mg/kg/día de clavulánico VO en 2 dosis<br><strong>Adultos:</strong> 875/125 mg c/12h</td></tr>
+      <tr><td><strong>Cefuroximo</strong></td><td>Falla terapéutica / alergia no inmediata a PNC</td><td><strong>Niños:</strong> 30 mg/kg/día VO en 2 dosis<br><strong>Adultos:</strong> 250 mg c/12h</td></tr>
+      <tr><td><strong>Ceftriaxona</strong></td><td>Falla terapéutica / vómitos</td><td>50 mg/kg/día IM o IV en 1 dosis × 3 días</td></tr>
+    </table>
+    <div class="sub-h">Duración del tratamiento</div>
+    <div class="info-block green">
+      <h4>Duración según edad y severidad</h4>
+      <ul>
+        <li><strong>&lt;2 años o síntomas severos:</strong> 10 días</li>
+        <li><strong>2–5 años, OMA leve-moderada:</strong> 7 días</li>
+        <li><strong>≥6 años, OMA leve-moderada:</strong> 5–7 días</li>
+      </ul>
+    </div>
+    <div class="sub-h">Analgesia (independiente del ATB)</div>
+    <table class="drug-table">
+      <tr><th>Fármaco</th><th>Dosis pediátrica</th><th>Dosis adulto</th></tr>
+      <tr><td>Paracetamol</td><td>15 mg/kg/dosis c/6–8h × 3–7 días</td><td>1 g c/8h × 3–7 días</td></tr>
+      <tr><td>Ibuprofeno</td><td>5–10 mg/kg/dosis c/8h × 3–5 días</td><td>400 mg c/8h × 3–5 días</td></tr>
+    </table>
+    <div class="alert danger"><div class="alert-icon">🚨</div><div><strong>Complicaciones que derivan urgente:</strong> mastoiditis (dolor/eritema retroauricular, pabellón desplazado), parálisis facial, meningitis, laberintitis, absceso cerebral → TC de oídos + hospitalización.</div></div>
+  </div>
+
+  <!-- OME -->
+  <div class="card">
+    <div class="card-title">Otitis Media con Efusión (OME) <span class="badge badge-blue">Crónica</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>Acumulación de líquido en oído medio <strong>sin signos de infección aguda</strong>. Causa principal: disfunción de la trompa de Eustaquio → presión negativa → trasudado. Factores: hiperplasia adenoidea, edad (trompa más horizontal en niños), tabaquismo pasivo. Cuando dura &gt;3 meses = OME crónica.</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Manifestaciones</div>
+        <ul>
+          <li>Hipoacusia o alteraciones del lenguaje (33–62%)</li>
+          <li>Sensación de oído tapado</li>
+          <li>Otalgia leve intermitente (76%)</li>
+          <li>Desequilibrio (15%)</li>
+          <li>En niños: tocarse el pabellón, irritabilidad, peor rendimiento escolar</li>
+        </ul>
+        <div class="sub-h">Otoscopía en OME</div>
+        <ul>
+          <li>Membrana opaca, rosada, hipervascularizada</li>
+          <li>Efusión ambarinada visible</li>
+          <li>Burbujas detrás de la membrana</li>
+          <li>Membrana retraída o levemente abombada</li>
+          <li>Triángulo luminoso ausente</li>
+          <li>Movilidad ↓ (otoscopía neumática)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">Diagnóstico</div>
+        <ul>
+          <li><strong>Otoscopía neumática:</strong> gold standard práctico (S:94%, E:80%)</li>
+          <li><strong>Impedanciometría:</strong> curva tipo B + ausencia de reflejo acústico (S:90–94%)</li>
+          <li><strong>Audiometría:</strong> hipoacusia conductiva, umbral promedio ~28 dB</li>
+          <li><strong>Nasofibroscopía en adultos:</strong> descartar tumor rinofaríngeo (especialmente OME unilateral)</li>
+        </ul>
+        <div class="alert warning"><div class="alert-icon">⚠️</div><div>OME unilateral en adulto → <strong>siempre descartar tumor de rinofaringe</strong> con nasofibroscopía.</div></div>
+      </div>
+    </div>
+    <div class="sub-h">Tratamiento</div>
+    <div class="algo">
+      <div class="algo-title">Algoritmo OME</div>
+      <div class="algo-step"><div class="step-num">1</div><div class="step-content"><strong>Observación 3 meses</strong> (75–90% resolución espontánea en ese tiempo post-OMA)</div></div>
+      <div class="algo-arrow">↓ No resuelve</div>
+      <div class="decision-box"><strong>¿Niño en riesgo?</strong> (hipoacusia basal, TEA, Síndrome de Down, fisura palatina, etc.) → <strong>Cirugía inmediata</strong> sin esperar 3 meses</div>
+      <div class="algo-arrow">↓</div>
+      <div class="algo-step"><div class="step-num">2</div><div class="step-content"><strong>Tratamiento médico:</strong> Solo corticoides intranasales tienen beneficio en OME con <em>rinitis alérgica</em> concomitante. Antihistamínicos y descongestionantes: sin beneficio demostrado.</div></div>
+      <div class="algo-arrow">↓ Si OME persiste &gt;3 meses con hipoacusia o síntomas</div>
+      <div class="algo-step"><div class="step-num">3</div><div class="step-content"><strong>Cirugía:</strong> Colocación de tubo de ventilación transtimpánico (collera), ± adenoidectomía si está indicada. Las colleras se expulsan espontáneamente en 10–18 meses.</div></div>
+    </div>
+  </div>
+
+  <!-- OMC -->
+  <div class="card">
+    <div class="card-title">Otitis Media Crónica (OMC) <span class="badge badge-purple">Especialista</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>Inflamación crónica del oído medio (&gt;3 meses). Asociada a <strong>perforación timpánica persistente</strong> y episodios recurrentes de otorrea. Bacterias principalmente Gram negativas (58%), especialmente <em>Pseudomonas aeruginosa</em> y <em>Proteus mirabilis</em>.</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Clínica</div>
+        <ul>
+          <li>Otorrea mucosa o purulenta crónica, episódica, indolora</li>
+          <li>Hipoacusia progresiva</li>
+          <li>Sin otalgia intensa (diferencia con OMA)</li>
+          <li>Episodios desencadenados por IVRS o agua en el oído</li>
+        </ul>
+        <div class="sub-h">Otoscopía OMC</div>
+        <ul>
+          <li><strong>OMC Simple:</strong> perforación central, mucosa edematosa/eritematosa</li>
+          <li><strong>Colesteatoma:</strong> masa blanquecina, bolsa de retracción en pars flácida (antero-superior), perforación marginal</li>
+        </ul>
+        <div class="alert danger"><div class="alert-icon">🚨</div><div><strong>Colesteatoma:</strong> produce enzimas líticas (colagenasa) → destruye cadena osicular, pared ósea. Complicaciones: parálisis facial, fístula laberíntica, meningitis. Requiere cirugía.</div></div>
+      </div>
+      <div>
+        <div class="sub-h">Weber y Rinne en OMC</div>
+        <div class="info-block blue">
+          <h4>Prueba de Rinne</h4>
+          <ul>
+            <li>Vibrar diapasón (512 Hz), poner en mastoides (conducción ósea, CO), luego frente al oído (conducción aérea, CA)</li>
+            <li><strong>Normal / hipoacusia neurosensorial:</strong> CA &gt; CO → Rinne positivo</li>
+            <li><strong>Hipoacusia conductiva (OMC):</strong> CO &gt; CA → <strong>Rinne negativo</strong></li>
+          </ul>
+        </div>
+        <div class="info-block purple">
+          <h4>Prueba de Weber</h4>
+          <ul>
+            <li>Diapasón vibrado en el vértex (centro del cráneo)</li>
+            <li><strong>Normal:</strong> se escucha igual en ambos lados</li>
+            <li><strong>Hipoacusia conductiva:</strong> lateraliza al oído <em>afectado</em></li>
+            <li><strong>Hipoacusia neurosensorial:</strong> lateraliza al oído <em>sano</em></li>
+          </ul>
+        </div>
+        <div class="sub-h">Tratamiento</div>
+        <ul>
+          <li><strong>Medidas generales:</strong> evitar entrada de agua, algodón con vaselina al bañarse</li>
+          <li><strong>ATB tópico:</strong> ciprofloxacino gotas 3–4 gotas c/8h × 7–10 días (no ototóxico)</li>
+          <li><strong>Cirugía:</strong> timpanoplastia ± mastoidectomía (resorte del especialista)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================= VÉRTIGO ========================= -->
+<div id="vertigo" class="section">
+  <div class="section-title">Síndrome Vertiginoso</div>
+  <div class="section-sub">VPPB · Ménière · Neuronitis vestibular · Migraña vestibular</div>
+
+  <div class="card">
+    <div class="card-title">Fisiopatología del Vértigo <span class="badge badge-blue">Base</span></div>
+    <p>El vértigo se produce por <strong>disfunción asimétrica del sistema vestibular</strong>. El cerebro interpreta la diferencia de señal entre ambos lados como movimiento. La vía vestíbulo-oculomotora genera el <strong>nistagmo</strong>: la fase lenta es vestibular (ojos se desvían hacia el oído afectado), la fase rápida es correctora (se dirige al lado sano). La <strong>dirección del nistagmo se define por la fase rápida</strong>.</p>
+    <div class="info-block blue">
+      <h4>Nistagmo periférico vs. central</h4>
+      <div class="nist-row"><div class="nist-label">Dirección</div><div class="nist-val"><strong>Periférico:</strong> horizontal, unidireccional · <strong>Central:</strong> vertical o multidireccional</div></div>
+      <div class="nist-row"><div class="nist-label">Fijación ocular</div><div class="nist-val"><strong>Periférico:</strong> disminuye con fijación ocular · <strong>Central:</strong> no disminuye</div></div>
+      <div class="nist-row"><div class="nist-label">Ley de Alexander</div><div class="nist-val"><strong>Periférico:</strong> sí la cumple (aumenta mirando hacia fase rápida) · <strong>Central:</strong> no la cumple</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Clasificación por perfil temporal <span class="badge badge-blue">Sociedad de Bárány</span></div>
+    <table class="drug-table">
+      <tr><th>Síndrome</th><th>Duración</th><th>% frecuencia</th><th>Diagnósticos frecuentes</th></tr>
+      <tr><td>Episódico corto</td><td>Segundos – 5 min</td><td>28%</td><td>VPPB, paroxismia vestibular</td></tr>
+      <tr><td>Episódico largo</td><td>5 min – horas</td><td>32%</td><td>Migraña vestibular, Ménière, CIT</td></tr>
+      <tr><td>Agudo</td><td>Horas – días</td><td>16%</td><td>Neuronitis vestibular, ACV</td></tr>
+      <tr><td>Crónico</td><td>Persistente (&gt;12 sem)</td><td>24%</td><td>Vestibulopatía bilateral, somatomorfo</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">VPPB — Vértigo Posicional Paroxístico Benigno <span class="badge badge-green">Más frecuente</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>Desprendimiento de otolitos (carbonato de calcio) de la membrana otolítica del utrículo → se desplazan al canal semicircular (CSC). Al moverse la cabeza, los otolitos causan un movimiento anómalo de la endolinfa → estimulación → vértigo e nistagmo posicional. <strong>CSC posterior: 80–90%</strong> de los casos.</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Clínica</div>
+        <ul>
+          <li>Crisis <strong>episódicas cortas</strong> (segundos a &lt;1 min)</li>
+          <li><strong>Gatilladas por cambios posturales</strong> (acostarse, levantarse, mirar arriba)</li>
+          <li><strong>En reposo NO hay vértigo</strong> (diferencia clave)</li>
+          <li>Náuseas y vómitos durante las crisis</li>
+          <li>50% cede espontáneamente; 50% recurre</li>
+        </ul>
+        <div class="sub-h">Examen físico</div>
+        <ul>
+          <li>Examen neurológico y HIT: <strong>normales</strong></li>
+          <li>Dix-Hallpike positivo: nistagmo <strong>geotrópico-torsional</strong> con latencia de segundos, dura &lt;1 min, se invierte al sentar</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">Diagnóstico diferencial</div>
+        <ul>
+          <li>Vértigo posicional central: migraña vestibular o lesión fosa posterior → nistagmo sin latencia, vertical, no se agota, sin inversión</li>
+        </ul>
+        <div class="alert warning"><div class="alert-icon">⚠️</div><div>Si nistagmo posicional atípico (vertical puro, no se agota, sin latencia) → RM cerebro fosa posterior con gadolinio para descartar patología central.</div></div>
+        <div class="sub-h">Tratamiento</div>
+        <ul>
+          <li><strong>Maniobra de Epley</strong> (VPPB CSC posterior) — ver sección Maniobras</li>
+          <li>Si el médico general diagnostica con certeza → puede realizar Epley</li>
+          <li>Si persiste, cúpulolitiasis o CSC lateral → derivar a otorrino</li>
+          <li>Fármacos: poca utilidad en VPPB (el tratamiento es mecánico)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Neuronitis Vestibular <span class="badge badge-amber">Síndrome vestibular agudo</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>Inflamación del nervio vestibular (generalmente post-viral). Produce hipofunción vestibular unilateral aguda. Afecta principalmente el nervio vestibular superior (CSC anterior, horizontal, utrículo).</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Clínica</div>
+        <ul>
+          <li><strong>Vértigo severo de inicio agudo</strong>, dura días</li>
+          <li>Náuseas y vómitos intensos</li>
+          <li><strong>Sin hipoacusia ni tinnitus</strong> (diferencia clave con Ménière)</li>
+          <li>Antecedente de infección viral reciente</li>
+          <li>Peor los primeros días, mejora progresivamente</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">Examen físico</div>
+        <ul>
+          <li>Nistagmo espontáneo horizontal, unidireccional, se aleja del oído afectado</li>
+          <li><strong>HIT positivo</strong> hacia el lado afectado (RVO dañado)</li>
+          <li>Romberg/Unterberger: cae hacia el lado afectado</li>
+          <li>Skew test negativo</li>
+        </ul>
+        <div class="alert danger"><div class="alert-icon">🚨</div><div><strong>HINTS+:</strong> HIT normal + nistagmo cambiante de dirección + Skew positivo → descartar ACV urgente (RM cerebral).</div></div>
+      </div>
+    </div>
+    <div class="sub-h">Tratamiento</div>
+    <table class="drug-table">
+      <tr><th>Fármaco</th><th>Dosis</th><th>Duración</th><th>Uso</th></tr>
+      <tr><td>Difenidol</td><td>25 mg c/8h</td><td>3–5 días máximo</td><td>Supresión vestibular sintomática (crisis)</td></tr>
+      <tr><td>Betahistina</td><td>16 mg c/8h o 24 mg c/12h</td><td>Semanas</td><td>Facilita compensación vestibular central</td></tr>
+      <tr><td>Corticoides</td><td>Prednisona 1 mg/kg/día × 5 días</td><td>Ciclo corto</td><td>Acorta duración si se inicia precoz</td></tr>
+    </table>
+    <p><strong>Rehabilitación vestibular:</strong> ejercicios de Brandt-Daroff y movimientos oculares aceleran la compensación central.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Enfermedad de Ménière <span class="badge badge-purple">Episódico largo</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>Acumulación de endolinfa en el laberinto membranoso (<strong>hidropesía endolinfática</strong>) → distensión y daño de estructuras cocleares y vestibulares. Daña inicialmente el ápice coclear (frecuencias graves). Causa multifactorial.</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Tríada de Ménière</div>
+        <div class="info-block purple">
+          <h4>Criterios diagnósticos (Sociedad de Bárány)</h4>
+          <ol>
+            <li>≥2 episodios de vértigo espontáneo de 20 min–12 h</li>
+            <li>Audiometría con hipoacusia sensorioneural unilateral en tonos graves</li>
+            <li>Síntomas aurales fluctuantes (hipoacusia, tinnitus, plenitud aural) en oído afectado</li>
+            <li>Sin otra causa que explique los síntomas</li>
+          </ol>
+        </div>
+      </div>
+      <div>
+        <div class="sub-h">Tratamiento</div>
+        <ul>
+          <li><strong>Estilo de vida:</strong> dieta hiposódica, hidratación, evitar tabaco, alcohol, manejar estrés</li>
+          <li><strong>Crisis:</strong> difenidol 25 mg c/8h × 3–5 días</li>
+          <li><strong>Prevención de crisis:</strong>
+            <ul>
+              <li>Betahistina <strong>24 mg c/12h</strong> × 3 meses (alta dosis; disminuye el hídrops)</li>
+              <li>Diuréticos (hidroclorotiazida + triamtereno)</li>
+            </ul>
+          </li>
+          <li><strong>Falla de tratamiento médico →</strong> derivar a otorrino (inyección intratimpánica de gentamicina o corticoides, cirugía del saco endolinfático)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Migraña Vestibular <span class="badge badge-blue">Episódico largo</span></div>
+    <p>Segunda causa más frecuente de vértigo episódico (11% consultas). Episodios recurrentes de vértigo de 5 min–72 h, con o sin cefalea migrañosa, sin gatillante posicional.</p>
+    <div class="sub-h">Tratamiento</div>
+    <ul>
+      <li><strong>Crisis:</strong> AINEs, difenidol 25 mg c/8h SOS</li>
+      <li><strong>Profilaxis:</strong> amitriptilina 12.5–25 mg/día, topiramato 25 mg/día, flunarizina 5 mg/día, propranolol 40 mg/día</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Examen Otoneurológico Completo <span class="badge badge-teal">Exploración</span></div>
+    <div class="info-block teal">
+      <h4>Pasos del examen vestibular</h4>
+      <ol>
+        <li><strong>Nistagmo espontáneo:</strong> mirada al centro y a 30° a cada lado. Buscar nistagmo. Tapar/destapar para evaluar efecto de fijación.</li>
+        <li><strong>Nistagmo posicional:</strong> Dix-Hallpike (CSC posterior) y McClure (CSC lateral)</li>
+        <li><strong>Seguimiento lento ocular:</strong> seguir dedo horizontalmente y verticalmente. Movimiento debe ser fluido (sacadas = origen central).</li>
+        <li><strong>Head Impulse Test (HIT):</strong> girar cabeza rápido en pequeños arcos. Sacadas correctivas = RVO dañado = origen periférico.</li>
+        <li><strong>Test of Skew:</strong> cover test alternante. Movimiento vertical = origen central.</li>
+        <li><strong>Cerebelosos:</strong> Romberg (con y sin visión), marcha en tándem, índice-nariz, disdiadococinesia.</li>
+        <li><strong>Marcha:</strong> inestabilidad, lateropulsión.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- ========================= HIPOACUSIA ========================= -->
+<div id="hipoacusia" class="section">
+  <div class="section-title">Evaluación Auditiva e Hipoacusia</div>
+  <div class="section-sub">Conductiva · Sensorioneural · Weber · Rinne · Audiometría</div>
+
+  <div class="card">
+    <div class="card-title">Pruebas con Diapasón <span class="badge badge-teal">Exploración</span></div>
+    <div class="grid2">
+      <div class="info-block teal">
+        <h4>Prueba de Rinne (por oído)</h4>
+        <p style="font-size:13.5px">Diapasón 512 Hz. 1° sobre mastoides (CO), 2° frente al CAE (CA).</p>
+        <ul>
+          <li><strong>Rinne positivo</strong> (CA &gt; CO): normal o hipoacusia neurosensorial (HSN)</li>
+          <li><strong>Rinne negativo</strong> (CO &gt; CA): hipoacusia conductiva (HC) de ≥30 dB</li>
+          <li><strong>Falso Rinne negativo:</strong> en HSN profunda unilateral (el oído sano escucha por conducción ósea)</li>
+        </ul>
+      </div>
+      <div class="info-block purple">
+        <h4>Prueba de Weber (bilateral comparativa)</h4>
+        <p style="font-size:13.5px">Diapasón 512 Hz en vértex o frente.</p>
+        <ul>
+          <li><strong>Sin lateralización:</strong> normal o pérdida simétrica</li>
+          <li><strong>Lateraliza al oído AFECTADO:</strong> hipoacusia conductiva (más ruido a ese lado → mejor CO)</li>
+          <li><strong>Lateraliza al oído SANO:</strong> hipoacusia neurosensorial unilateral</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-block green">
+      <h4>Regla mnemotécnica</h4>
+      <p style="font-size:14px"><strong>Conductiva → Weber al peor oído</strong> (el oído malo oye mejor por hueso porque no hay competencia del ruido ambiental)</p>
+      <p style="font-size:14px"><strong>Neurosensorial → Weber al mejor oído</strong> (las células ciliadas del oído sano reciben mejor la señal)</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Audiometría — Interpretación Básica <span class="badge badge-blue">Diagnóstico</span></div>
+    <div class="sub-h">Grados de hipoacusia</div>
+    <table class="drug-table">
+      <tr><th>Grado</th><th>Umbral auditivo</th><th>Impacto</th></tr>
+      <tr><td>Normal</td><td>&lt;25 dB</td><td>Sin dificultad</td></tr>
+      <tr><td>Leve</td><td>25–40 dB</td><td>Dificultad con voz baja</td></tr>
+      <tr><td>Moderada</td><td>41–70 dB</td><td>Dificultad con voz normal</td></tr>
+      <tr><td>Severa</td><td>71–90 dB</td><td>Solo voz fuerte o amplificada</td></tr>
+      <tr><td>Profunda</td><td>&gt;90 dB</td><td>No hay comprensión sin apoyo</td></tr>
+    </table>
+    <div class="grid2">
+      <div class="info-block blue">
+        <h4>Patrón conductivo en audiometría</h4>
+        <ul>
+          <li>Umbral aéreo elevado</li>
+          <li>Umbral óseo normal</li>
+          <li><strong>GAP aéreo-óseo &gt;10 dB</strong></li>
+          <li>Reflejo acústico ausente</li>
+          <li>Timpanograma tipo B (OME) o tipo A plano</li>
+        </ul>
+      </div>
+      <div class="info-block purple">
+        <h4>Patrón neurosensorial en audiometría</h4>
+        <ul>
+          <li>Umbral aéreo y óseo elevados en paralelo</li>
+          <li>GAP aéreo-óseo ausente (&lt;10 dB)</li>
+          <li>Ménière: pérdida en frecuencias graves inicialmente</li>
+          <li>Trauma acústico: muesca en 4000 Hz</li>
+          <li>Presbiacusia: pérdida progresiva de agudos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Hipoacusia Conductiva — Causas y Manejo <span class="badge badge-amber">Conductiva</span></div>
+    <table class="drug-table">
+      <tr><th>Causa</th><th>Mecanismo</th><th>Clave clínica</th></tr>
+      <tr><td>Tapón de cerumen</td><td>Obstrucción CAE</td><td>Inicio súbito post-ducha; tx: extracción</td></tr>
+      <tr><td>OMA</td><td>Efusión oído medio</td><td>Otalgia, fiebre, membrana abombada</td></tr>
+      <tr><td>OME</td><td>Efusión sin inflamación</td><td>Timpanograma B; niños</td></tr>
+      <tr><td>OMC / Colesteatoma</td><td>Perforación + otorrea</td><td>Crónica, indolora, otorrea fétida</td></tr>
+      <tr><td>Otoesclerosis</td><td>Fijación del estribo</td><td>Adultos jóvenes; Rinne (-); Schwartze +</td></tr>
+      <tr><td>Disrupción osicular</td><td>Fractura u erosión</td><td>Post-trauma o colesteatoma</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Hipoacusia Sensorioneural — Causas y Manejo <span class="badge badge-red">Neurosensorial</span></div>
+    <div class="sub-h">Hipoacusia Súbita</div>
+    <div class="info-block red">
+      <h4>Urgencia — actuar en las primeras 72 horas</h4>
+      <p style="font-size:14px">Pérdida de ≥30 dB en ≥3 frecuencias contiguas en ≤72 h. Sin causa identificada. Derivar <strong>urgente</strong> al otorrino.</p>
+      <p style="font-size:14px"><strong>Tratamiento:</strong> corticoides sistémicos (prednisona 1 mg/kg/día × 10–14 días con reducción) ± corticoides intratimpánicos. Pronóstico mejor con inicio precoz.</p>
+    </div>
+    <table class="drug-table">
+      <tr><th>Causa</th><th>Características</th><th>Claves</th></tr>
+      <tr><td>Presbiacusia</td><td>Pérdida bilateral simétrica de agudos</td><td>Adultos mayores; progresiva</td></tr>
+      <tr><td>Trauma acústico</td><td>Muesca en 4000 Hz</td><td>Exposición a ruido; IPPS</td></tr>
+      <tr><td>Ménière</td><td>Pérdida graves, fluctuante</td><td>Tríada clásica</td></tr>
+      <tr><td>Hipoacusia súbita</td><td>Unilateral aguda</td><td>Urgencia; corticoides</td></tr>
+      <tr><td>Ototoxicidad</td><td>Aminoglucósidos, cisplatino, furosemida</td><td>Bilateral, agudos; monitoreo</td></tr>
+      <tr><td>Schwannoma vestibular</td><td>Unilateral asimétrica</td><td>Tinnitus unilateral; RM CAI</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ========================= NARIZ ========================= -->
+<div id="nariz" class="section">
+  <div class="section-title">Patología Rinosinusal</div>
+  <div class="section-sub">Rinitis · RSA · RSC · Epistaxis</div>
+
+  <div class="card">
+    <div class="card-title">Rinitis Alérgica <span class="badge badge-green">Muy frecuente</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>Reacción antígeno-anticuerpo tipo I (Gell y Coombs). IgE específica se une a mastocitos de mucosa nasal. Al contacto con el alérgeno: degranulación → histamina → síntomas inmediatos (estornudos, prurito, rinorrea acuosa). Fase tardía (4–24 h): mediadores neoformados (leucotrienos, prostaglandinas) → eosinófilos → congestión.</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Manifestaciones</div>
+        <ul>
+          <li>Estornudos en salva</li>
+          <li>Rinorrea acuosa</li>
+          <li>Prurito nasal, ocular</li>
+          <li>Obstrucción nasal (fase tardía)</li>
+          <li>Alteración del olfato</li>
+          <li>Conjuntivitis alérgica asociada</li>
+        </ul>
+        <div class="sub-h">Exploración nasal</div>
+        <ul>
+          <li>Mucosa <strong>pálida, edematosa</strong> (violácea en rinitis no alérgica)</li>
+          <li>Rinorrea mucosa (puentes mucosos)</li>
+          <li>Cornetes inferiores hipertrofiados</li>
+          <li>Herramienta: espéculo nasal + buena luz; o rinoscopia anterior con otoscopio</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">Clasificación ARIA 2010</div>
+        <table class="drug-table">
+          <tr><th>Duración</th><th>Severidad</th></tr>
+          <tr><td>Intermitente: &lt;4 días/sem o &lt;4 semanas</td><td>Leve: no altera el sueño ni actividades</td></tr>
+          <tr><td>Persistente: &gt;4 días/sem y &gt;4 semanas</td><td>Moderada-severa: ≥1 de las siguientes: altera sueño, actividades diarias, trabajo/escuela</td></tr>
+        </table>
+        <div class="sub-h">Diagnóstico</div>
+        <ul>
+          <li><strong>Clínico</strong> (anamnesis + examen físico)</li>
+          <li><strong>Prick test:</strong> pápula &gt;3mm = sensibilización. Suspender AH 2–7 días antes.</li>
+          <li>IgE total: poca utilidad aislada</li>
+          <li>IgE específica: útil si no puede hacerse prick test</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-h">Tratamiento farmacológico</div>
+    <table class="drug-table">
+      <tr><th>Fármaco</th><th>Rinorrea</th><th>Estornudos</th><th>Obstrucción</th><th>Dosis (adulto)</th></tr>
+      <tr><td>Antihistamínico oral (2ª gen)</td><td>++</td><td>++</td><td>+</td><td>Loratadina 10 mg/día; Cetirizina 10 mg/día; Desloratadina 5 mg/día; Fexofenadina 120 mg/día</td></tr>
+      <tr><td>Corticoide intranasal</td><td>+++</td><td>+++</td><td>+++</td><td>Mometasona 200 mcg c/24h; Fluticasona 200 mcg c/24h</td></tr>
+      <tr><td>Descongestionante nasal</td><td>0</td><td>0</td><td>++++</td><td>Oximetazolina: máx 3–5 días (rinitis medicamentosa si &gt;10 días)</td></tr>
+      <tr><td>Montelukast</td><td>+</td><td>+</td><td>+</td><td>Adultos 10 mg/día; 6–14 años 5 mg/día; 2–6 años 4 mg/día</td></tr>
+      <tr><td>Ipratropio tópico</td><td>++</td><td>0</td><td>0</td><td>2 pulv c/8h (especial para rinorrea serosa)</td></tr>
+    </table>
+    <div class="info-block green">
+      <h4>Escalón terapéutico (Consenso ARIA)</h4>
+      <ul>
+        <li><strong>Leve intermitente:</strong> AH oral o AH nasal</li>
+        <li><strong>Moderada-severa intermitente o leve persistente:</strong> AH oral + corticoide intranasal</li>
+        <li><strong>Moderada-severa persistente:</strong> corticoide intranasal (de elección) ± AH oral ± montelukast</li>
+        <li><strong>Falla al tratamiento médico:</strong> inmunoterapia específica</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Rinosinusitis Aguda (RSA) <span class="badge badge-amber">Frecuente</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>La mayoría comienza como RSA viral (resfriado común). La inflamación obstruye los ostia de los senos paranasales → hipoxia → vasodilatación → trasudado → disfunción ciliar → retención de secreciones → colonización bacteriana. El <strong>0.5–2% de las RSA virales</strong> se complican con infección bacteriana.</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Criterios diagnósticos</div>
+        <p>2 o más síntomas (uno debe ser A o B):</p>
+        <ul>
+          <li>A. Obstrucción/congestión nasal</li>
+          <li>B. Rinorrea anterior o posterior</li>
+          <li>C. Dolor / presión facial</li>
+          <li>D. Reducción del olfato (adultos) / Tos (niños)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">¿Cuándo sospechar RSA bacteriana? (EPOS)</div>
+        <div class="info-block amber">
+          <h4>Predictores de RSA bacteriana</h4>
+          <ul>
+            <li>Rinorrea purulenta (con predominio unilateral)</li>
+            <li>Duración &gt;10 días sin mejoría</li>
+            <li>Doble curva: mejoría seguida de empeoramiento</li>
+            <li>Fiebre &gt;38°C</li>
+            <li>Dolor facial intenso unilateral</li>
+            <li>Elevación PCR/VHS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="sub-h">Manejo</div>
+    <div class="algo">
+      <div class="algo-title">Algoritmo RSA en Atención Primaria (EPOS 2012)</div>
+      <div class="decision-box"><strong>Síntomas &lt;5 días o mejorando:</strong> → Manejo sintomático: lavados nasales con suero, descongestionantes tópicos (oximetazolina) máx 5 días, paracetamol o AINEs.</div>
+      <div class="algo-arrow">↓ Si síntomas persisten &gt;10 días o empeoran después de 5 días</div>
+      <div class="algo-step"><div class="step-num">1</div><div class="step-content"><strong>Moderado:</strong> Agregar corticoide intranasal (mometasona 300 mcg c/12h = 2 puff c/fosa c/12h).</div></div>
+      <div class="algo-step"><div class="step-num">2</div><div class="step-content"><strong>Severo (≥3 criterios bacterianos):</strong> Iniciar antibióticos.</div></div>
+    </div>
+    <div class="sub-h">Antibióticos en RSA bacteriana</div>
+    <table class="drug-table">
+      <tr><th>ATB</th><th>Dosis adulto</th><th>Dosis niño</th><th>Duración</th></tr>
+      <tr><td><strong>Amoxicilina</strong> (1ª línea)</td><td>2–4 g/día en 2–3 dosis</td><td>75–90 mg/kg/día en 2–3 dosis</td><td>10–14 días (mínimo 7)</td></tr>
+      <tr><td>Amoxicilina-Clavulánico</td><td>875/125 mg c/12h</td><td>45 mg/kg/día en 2 dosis</td><td>10–14 días</td></tr>
+    </table>
+    <div class="alert danger"><div class="alert-icon">🚨</div><div><strong>Complicaciones de RSA → derivar urgente:</strong> edema orbitario, proptosis, oftalmoplejia, cefalea severa, meningismo, alteración de conciencia → TC urgente.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Epistaxis <span class="badge badge-red">Urgencia</span></div>
+    <div class="sub-h">Clasificación y anatomía</div>
+    <p><strong>Anterior (90%):</strong> plexo de Kiesselbach (anastomosis carótida interna y externa en la zona de Little). Más frecuente en niños. Leve-moderada.<br>
+    <strong>Posterior (10%):</strong> arteria esfenopalatina. Mayor cuantía, más difícil manejo. Adultos mayores.</p>
+    <div class="sub-h">Causas</div>
+    <div class="grid2">
+      <div class="info-block blue">
+        <h4>Causas locales</h4>
+        <ul><li>Trauma (escarbarse la nariz)</li><li>Inflamación / rinitis</li><li>Desviación septal</li><li>Cuerpo extraño</li><li>Tumores (fibroangioma de rinofaringe: adolescente masculino)</li></ul>
+      </div>
+      <div class="info-block amber">
+        <h4>Causas sistémicas</h4>
+        <ul><li>Anticoagulantes (warfarina, NACO) / antiagregantes</li><li>HTA descompensada</li><li>Discrasias: von Willebrand, hemofilia, leucemia</li><li>Enf. de Osler-Weber-Rendu (MAV)</li><li>Corticoides nasales (irritación)</li></ul>
+      </div>
+    </div>
+    <div class="sub-h">Tratamiento según gravedad</div>
+    <div class="algo">
+      <div class="algo-title">Algoritmo Epistaxis</div>
+      <div class="algo-step"><div class="step-num">1</div><div class="step-content"><strong>Estabilizar al paciente</strong> — evaluar estado hemodinámico, signos vitales, acceso venoso si necesario.</div></div>
+      <div class="algo-arrow">↓</div>
+      <div class="algo-step"><div class="step-num">2</div><div class="step-content"><strong>Compresión bidigital vestibular</strong> 10–15 min continua. Sentar al paciente, cabeza hacia adelante.</div></div>
+      <div class="algo-arrow">↓ Si no cede</div>
+      <div class="algo-step"><div class="step-num">3</div><div class="step-content"><strong>Vasoconstrictores + anestesia tópica</strong> (lidocaína 4–10% + oximetazolina) en mota de algodón.</div></div>
+      <div class="algo-arrow">↓</div>
+      <div class="decision-box"><strong>¿Se identifica vaso sangrante anterior?</strong> → <strong>Cauterización con nitrato de plata</strong> (comenzar alrededor del punto, luego sobre él; en superficie seca; solo un lado del tabique).</div>
+      <div class="algo-arrow">↓ Si no es posible cauterizar o sangrado profuso</div>
+      <div class="algo-step"><div class="step-num">4</div><div class="step-content"><strong>Taponamiento anterior</strong> (gasa lubrificada o Merocell® → hidratar con SF). Dejar 3–7 días con ATB sistémico (riesgo de shock tóxico).</div></div>
+      <div class="algo-arrow">↓ Si sangrado posterior</div>
+      <div class="algo-step"><div class="step-num">5</div><div class="step-content"><strong>Taponamiento posterior</strong> (Foley o gasa transorética) + taponamiento anterior. <strong>Hospitalizar</strong>. ATB sistémico. Preparar cirugía (ligadura AEP).</div></div>
+    </div>
+    <div class="alert warning"><div class="alert-icon">⚠️</div><div>No suspender anticoagulantes sin autorización del cardiólogo tratante, salvo epistaxis masiva con riesgo vital o anticoagulación sobre rango terapéutico. Profilaxis secundaria (stents) NO se suspende.</div></div>
+  </div>
+</div>
+
+<!-- ========================= FARINGE ========================= -->
+<div id="faringe" class="section">
+  <div class="section-title">Patología de Faringe y Orofaringe</div>
+  <div class="section-sub">Faringoamigdalitis · Absceso periamigdalino · Mononucleosis</div>
+
+  <div class="card">
+    <div class="card-title">Faringoamigdalitis Aguda (FA) <span class="badge badge-amber">Muy frecuente</span></div>
+    <div class="sub-h">Etiología</div>
+    <p><strong>70–80% viral</strong> (VEB, Adenovirus, CMV, influenza, parainfluenza, VHS, Coxsackie). <strong>20–30% bacteriana</strong>, siendo <em>Streptococcus pyogenes</em> (SBHGA) el más importante (15–30% en niños 5–15 años).</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">FA Bacteriana (SBHGA)</div>
+        <ul>
+          <li>Odinofagia de inicio <strong>brusco</strong> e intensidad variable</li>
+          <li>Fiebre elevada</li>
+          <li><strong>Ausencia de tos o coriza</strong> (clave diferencial)</li>
+          <li>Amígdalas eritematosas con <strong>exudado pultáceo</strong></li>
+          <li>Petequias en paladar blando o úvula</li>
+          <li>Adenopatía cervical anterior dolorosa</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">FA Viral</div>
+        <ul>
+          <li>Inicio gradual con pródromos catarrales</li>
+          <li><strong>Coriza, tos, disfonía, conjuntivitis</strong></li>
+          <li>Fiebre leve</li>
+          <li>Mucosa faríngea granular, escaso exudado</li>
+          <li>Aftas o vesículas (Herpes, Coxsackie)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-h">Score de Centor modificado (McIsaac)</div>
+    <div class="info-block blue">
+      <h4>Sumar puntos:</h4>
+      <ul>
+        <li>Amígdalas aumentadas con exudado → +1</li>
+        <li>Linfonodos cervicales anteriores sensibles → +1</li>
+        <li>Fiebre &gt;38°C (24h previas) → +1</li>
+        <li>Ausencia de tos → +1</li>
+        <li>Edad 3–14 años → +1 / Edad 14–44 años → 0 / &gt;44 años → -1</li>
+      </ul>
+    </div>
+    <table class="drug-table">
+      <tr><th>Puntaje</th><th>Probabilidad SBHGA</th><th>Conducta</th></tr>
+      <tr><td>≤1</td><td>5–10%</td><td>No cultivo, no ATB</td></tr>
+      <tr><td>2</td><td>11–17%</td><td>Considerar cultivo</td></tr>
+      <tr><td>3</td><td>28–35%</td><td>Cultivo o test pack; ATB si positivo</td></tr>
+      <tr><td>≥4</td><td>51–53%</td><td>ATB empírico (o confirmar con cultivo/test pack)</td></tr>
+    </table>
+    <div class="sub-h">Tratamiento ATB de FA estreptocócica (duración: 10 días)</div>
+    <table class="drug-table">
+      <tr><th>Situación</th><th>Antibiótico</th><th>Dosis</th></tr>
+      <tr><td rowspan="3">Sin alergia a PNC</td><td><strong>Penicilina V</strong></td><td>&lt;12 años: 250 mg c/12h; &gt;12 años: 500 mg c/12h</td></tr>
+      <tr><td><strong>Penicilina Benzatina</strong> (dosis única)</td><td>&lt;27 kg: 600.000 UI IM; &gt;27 kg: 1.200.000 UI IM</td></tr>
+      <tr><td><strong>Amoxicilina</strong></td><td>0–4 años: 50 mg/kg/día c/12h; &gt;4 años: 750 mg/día; Adultos: 500 mg c/8h</td></tr>
+      <tr><td>Alergia inmediata a PNC</td><td>Clindamicina</td><td>Niños: 20 mg/kg/día en 2 dosis; Adultos: 300 mg c/12h</td></tr>
+      <tr><td>Alergia inmediata a PNC</td><td>Azitromicina</td><td>Niños: 10 mg/kg/día en 1 dosis; Adultos: 500 mg/día</td></tr>
+      <tr><td>Alergia retardada a PNC</td><td>Cefadroxilo</td><td>Niños: 30 mg/kg/día en 2 dosis; Adultos: 500 mg c/12h</td></tr>
+      <tr><td>Episodios recurrentes / falla</td><td>Amoxicilina-Clavulánico</td><td>Niños: 40 mg/kg/día en 2 dosis; Adultos: 875/125 mg c/12h × 10 días</td></tr>
+    </table>
+    <div class="alert info"><div class="alert-icon">ℹ️</div><div>El ATB debe iniciarse hasta 9 días del inicio para prevenir fiebre reumática. Esto respalda esperar cultivo antes de iniciar.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Mononucleosis Infecciosa <span class="badge badge-purple">VEB</span></div>
+    <p>VEB (80–90%), CMV (5–7%), otros. Más frecuente en niños y adolescentes.</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Clínica</div>
+        <ul>
+          <li>Odinofagia, fiebre</li>
+          <li>Amígdalas con exudado (similar a FA bacteriana)</li>
+          <li>Adenopatías cervicales <strong>anteriores y posteriores</strong></li>
+          <li>Hepatoesplenomegalia</li>
+          <li><strong>Exantema máculo-papular</strong> si se administran aminopenicilinas (amoxicilina) → diagnóstico</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">Diagnóstico y tratamiento</div>
+        <ul>
+          <li><strong>Hemograma:</strong> leucocitosis con linfocitosis ≥50%, linfocitos atípicos ≥10%</li>
+          <li><strong>Anticuerpos heterófilos:</strong> S: 85%, E: 100%. Peak 2–6 semanas.</li>
+          <li><strong>IgM VCA VEB:</strong> positivo precozmente hasta 3–6 meses</li>
+          <li><strong>Tratamiento:</strong> sintomático. No antibióticos. Evitar contacto deportivo (riesgo ruptura esplénica).</li>
+          <li><strong>No amoxicilina:</strong> exantema 80–90% de los casos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Absceso Periamigdalino <span class="badge badge-red">Urgencia</span></div>
+    <div class="sub-h">Fisiopatología</div>
+    <p>Complicación de FA estreptocócica (o por anaerobios). Infección polimicrobiana (SBHGA, <em>S. aureus</em>, anaerobios respiratorios) en el espacio entre amígdala y constrictor superior de la faringe. Polo superior predominante.</p>
+    <div class="grid2">
+      <div>
+        <div class="sub-h">Clínica</div>
+        <ul>
+          <li>Odinofagia + fiebre (similar FA, pero…)</li>
+          <li><strong>Trismus</strong> (dificultad para abrir la boca — espasmo pterigoideo medial) → presente en 2/3, diferencia de FA severa</li>
+          <li><strong>Voz gangosa</strong> ("papa caliente")</li>
+          <li>Desviación de la úvula hacia contralateral</li>
+          <li>Abombamiento unilateral del pilar anterior</li>
+          <li>Adenopatías cervicales</li>
+          <li>Otalgia referida</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-h">Diagnóstico</div>
+        <ul>
+          <li>Clínico</li>
+          <li>TC cuello con contraste si duda o compromiso de VA: absceso = hipodensa con realce periférico</li>
+        </ul>
+        <div class="sub-h">Tratamiento (total 14 días)</div>
+        <div class="info-block red">
+          <h4>Flegmón: ATB sin drenaje. Absceso: ATB + drenaje.</h4>
+          <ul>
+            <li>Hidratación IV</li>
+            <li>Analgesia</li>
+            <li>ATB VO adultos: Amoxicilina-Clavulánico 875/125 mg c/12h o Clindamicina 300–600 mg c/8h</li>
+            <li>ATB IV adultos: Ceftriaxona 2 g/día + Clindamicina 600 mg c/8h</li>
+            <li>Drenaje quirúrgico (si absceso)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================= LARINGE ========================= -->
+<div id="laringe" class="section">
+  <div class="section-title">Patología Laríngea</div>
+  <div class="section-sub">Disfonía · Estridor · Crup · Epiglotitis</div>
+
+  <div class="card">
+    <div class="card-title">Disfonía — Enfrentamiento <span class="badge badge-blue">Frecuente</span></div>
+    <div class="sub-h">Síntomas de alarma → derivación inmediata</div>
+    <div class="info-block red">
+      <h4>Derivar inmediatamente a ORL si:</h4>
+      <ul>
+        <li>Disfonía persistente &gt;2 semanas sin IVRS y con factores de riesgo (tabaco, alcohol) o síntomas de alarma</li>
+        <li>Disnea, estridor, disfagia, odinofagia, hemoptisis, otalgia unilateral, baja de peso</li>
+        <li>Sospecha de cáncer laríngeo</li>
+      </ul>
+    </div>
+    <div class="sub-h">Causas principales</div>
+    <table class="drug-table">
+      <tr><th>Causa</th><th>Características</th><th>Tx</th></tr>
+      <tr><td>Laringitis aguda viral</td><td>Inicio brusco, autolimitada, IVRS previa</td><td>Reposo vocal, hidratación; NO ATB ni corticoides de rutina</td></tr>
+      <tr><td>Nódulos vocales</td><td>Uso vocal abusivo; bilateral, voz áspera; profesores, niños</td><td>Terapia vocal; cirugía si falla</td></tr>
+      <tr><td>Pólipos vocales</td><td>Unilateral; inicio brusco; ambientes ruidosos, tabaco</td><td>Resección quirúrgica + fonoaudiología</td></tr>
+      <tr><td>Granuloma vocal</td><td>Aritenoides; post-intubación, reflujo</td><td>Manejo reflujo, fonoaudiología</td></tr>
+      <tr><td>Cáncer de laringe</td><td>Disfonía progresiva; fumador; hombre; 30x más frecuente con 1.5 cajet/día × 10 años</td><td>Urgente a ORL</td></tr>
+      <tr><td>Parálisis cordal unilateral</td><td>Voz soplada, fatiga vocal; descartar tumor (TC cuello + tórax)</td><td>Fonoaudiología; medialización</td></tr>
+      <tr><td>Reflujo faringolaríngeo</td><td>Carraspeo crónico, globus; laringitis posterior</td><td>IBP; cambios de estilo de vida</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Estridor — Crup vs. Epiglotitis <span class="badge badge-red">Urgencia</span></div>
+    <table class="cmp-table">
+      <tr><th></th><th style="color:var(--teal)">Crup (LTB)</th><th style="color:var(--red)">Epiglotitis aguda</th></tr>
+      <tr><td><strong>Etiología</strong></td><td>Virus parainfluenza (tipos 1 y 2)</td><td>H. influenzae tipo b (rara desde vacuna Hib); también S. aureus</td></tr>
+      <tr><td><strong>Edad</strong></td><td>6 meses – 3 años (pico 2 años)</td><td>2–7 años; adultos posible</td></tr>
+      <tr><td><strong>Inicio</strong></td><td>Gradual, pródromos catarrales días previos</td><td>Brusco, en horas</td></tr>
+      <tr><td><strong>Fiebre</strong></td><td>Baja (38–38.5°C)</td><td>Alta (39–40°C)</td></tr>
+      <tr><td><strong>Tos</strong></td><td><strong>Tos perruna</strong> (en ladrido)</td><td>Ausente o mínima</td></tr>
+      <tr><td><strong>Estridor</strong></td><td>Inspiratorio (subglótico)</td><td>Inspiratorio (supraglótico)</td></tr>
+      <tr><td><strong>Voz / llanto</strong></td><td>Afonía, disfonía</td><td>Voz en "papa caliente", babeo</td></tr>
+      <tr><td><strong>Posición</strong></td><td>Tolera supino; llora activamente</td><td>Trípode (sentado, lean forward); no llora</td></tr>
+      <tr><td><strong>Aspecto</strong></td><td>No tóxico habitualmente</td><td>Tóxico, ansioso, terror</td></tr>
+      <tr><td><strong>Babeo</strong></td><td>No</td><td><span class="check">Sí — signo clave</span></td></tr>
+      <tr><td><strong>Radiografía</strong></td><td>Signo del campanario (estrechamiento subglótico)</td><td>Signo del pulgar (epiglotis engrosada en lateral)</td></tr>
+      <tr><td><strong>Explorar faringe</strong></td><td>Puede intentarse</td><td><span class="cross">NUNCA — riesgo laringoespasmo fatal</span></td></tr>
+      <tr><td><strong>Tratamiento</strong></td><td>Dexametasona ± adrenalina nebulizada</td><td><strong>PRIMERO ASEGURAR VÍA AÉREA</strong>, luego ATB IV (ceftriaxona)</td></tr>
+    </table>
+    <div class="sub-h">Manejo del Crup — Escala de Westley</div>
+    <div class="algo">
+      <div class="algo-title">Algoritmo de Tratamiento — Crup</div>
+      <div class="decision-box"><strong>Leve (Westley ≤2):</strong> Dexametasona oral 0.15–0.6 mg/kg dosis única. Alta domiciliaria. Aire fresco.</div>
+      <div class="algo-arrow">↓</div>
+      <div class="decision-box"><strong>Moderado (Westley 3–5):</strong> Dexametasona IM/VO + observación hospitalaria 1–2 h.</div>
+      <div class="algo-arrow">↓</div>
+      <div class="decision-box"><strong>Grave (Westley ≥6):</strong> <span style="color:var(--red)">Adrenalina nebulizada (L-adrenalina 0.5 mL/kg de 1:1000, máx 5 mL) + Dexametasona IV. Observación mínimo 2–4 h (efecto rebote). Si no responde: intubación (tubo más pequeño de lo esperado).</span></div>
+    </div>
+    <div class="alert warning"><div class="alert-icon">⚠️</div><div><strong>Efecto rebote adrenalina:</strong> la adrenalina dura 2 horas. No dar alta antes de 4 horas de observación post-nebulización.</div></div>
+  </div>
+</div>
+
+<!-- ========================= MANIOBRAS ========================= -->
+<div id="maniobras" class="section">
+  <div class="section-title">Maniobras Diagnósticas y Terapéuticas</div>
+  <div class="section-sub">Dix-Hallpike · Epley · McClure · Weber · Rinne</div>
+
+  <div class="card">
+    <div class="card-title">Maniobra de Dix-Hallpike <span class="badge badge-purple">Diagnóstica</span></div>
+    <div class="sub-h">¿Para qué sirve?</div>
+    <p>Diagnostica el <strong>VPPB del canal semicircular posterior</strong> (el más frecuente, 80–90%). Al movilizar la cabeza hacia atrás y girada, los otolitos desprendidos en el CSC posterior se desplazan y generan un movimiento anómalo de la endolinfa → nistagmo posicional. Permite identificar qué lado está afectado.</p>
+    <div class="sub-h">Cómo realizarla (paso a paso)</div>
+    <div class="maniobra-step"><div class="man-num">1</div><div class="man-text">Sentar al paciente en el centro de la camilla, piernas extendidas cuando se acueste. Explicar que puede sentir vértigo — es esperado.</div></div>
+    <div class="maniobra-step"><div class="man-num">2</div><div class="man-text">Girar la cabeza del paciente <strong>45° hacia la derecha</strong> (para examinar CSC posterior derecho). Mantener esa angulación.</div></div>
+    <div class="maniobra-step"><div class="man-num">3</div><div class="man-text">Con la cabeza girada 45°, <strong>recostarlo rápidamente</strong> hacia atrás hasta que la cabeza quede colgando 20–30° por debajo del plano de la camilla. El examinador sostiene la cabeza en todo momento.</div></div>
+    <div class="maniobra-step"><div class="man-num">4</div><div class="man-text"><strong>Observar los ojos durante 30–60 segundos</strong> (sin que el paciente los cierre). Buscar nistagmo. Si hay VPPB posterior derecho: aparece nistagmo geotrópico torsional (el polo superior del ojo gira hacia el suelo / oído de abajo) con latencia de 2–10 segundos, dura &lt;1 minuto.</div></div>
+    <div class="maniobra-step"><div class="man-num">5</div><div class="man-text">Sentar al paciente <strong>suavemente</strong>. Al sentarse, el nistagmo se invierte de dirección pero con menor intensidad.</div></div>
+    <div class="maniobra-step"><div class="man-num">6</div><div class="man-text">Repetir la misma maniobra con la cabeza girada <strong>45° hacia la izquierda</strong> (CSC posterior izquierdo). El nistagmo aparece cuando la cabeza cuelga hacia el lado afectado.</div></div>
+    <div class="info-block purple">
+      <h4>Interpretación</h4>
+      <ul>
+        <li><strong>Canalolitiasis:</strong> nistagmo con latencia (2–10 seg), dura &lt;1 min, se agota con la repetición, se invierte al sentar → indica VPPB CSC posterior</li>
+        <li><strong>Cúpulolitiasis:</strong> nistagmo sin latencia, puede durar &gt;1 min, no se agota</li>
+        <li><strong>Negativo:</strong> sin nistagmo → no es VPPB de CSC posterior (considerar otras causas)</li>
+        <li><strong>Nistagmo vertical o sin inversión al sentar:</strong> sospechar origen central → RM fosa posterior</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Maniobra de Epley (Reposición de partículas) <span class="badge badge-green">Terapéutica</span></div>
+    <div class="sub-h">¿Para qué sirve?</div>
+    <p>Trata el <strong>VPPB del CSC posterior</strong>. El objetivo es mover los otolitos desprendidos desde el canal semicircular posterior de vuelta al utrículo, donde son reabsorbidos. Efectividad de ~80% en una sola sesión. Se explica para el lado <strong>derecho</strong> (adaptar simétricamente para el izquierdo).</p>
+    <div class="sub-h">Pasos para CSC posterior DERECHO</div>
+    <div class="maniobra-step"><div class="man-num">1</div><div class="man-text"><strong>Posición inicial = Dix-Hallpike positivo derecho:</strong> paciente sentado, girar cabeza 45° a la derecha, recostarlo rápido con cabeza colgando. Mantener 30–60 segundos hasta que ceda el nistagmo.</div></div>
+    <div class="maniobra-step"><div class="man-num">2</div><div class="man-text">Sin levantar al paciente, girar la cabeza <strong>90° hacia el lado opuesto</strong> (ahora la cara mira a la izquierda, cabeza girada 45° a la izquierda respecto al cuerpo en supino). Mantener 30–60 seg.</div></div>
+    <div class="maniobra-step"><div class="man-num">3</div><div class="man-text">El paciente gira el <strong>cuerpo completo</strong> hacia la izquierda (boca abajo, cara mirando al suelo en decúbito prono). La cabeza sigue mirando a la izquierda (ahora mira al suelo). Mantener 30–60 seg.</div></div>
+    <div class="maniobra-step"><div class="man-num">4</div><div class="man-text">Sentar al paciente lentamente desde la posición lateral, manteniendo la cabeza girada levemente a la derecha. <strong>El paciente queda sentado con barbilla levemente hacia abajo.</strong></div></div>
+    <div class="info-block green">
+      <h4>¿Qué ocurre con los otolitos durante la maniobra?</h4>
+      <p style="font-size:13.5px">Los otolitos se desplazan por gravedad a lo largo del CSC posterior → el examinador va moviendo la cabeza de tal forma que la cúpula del CSC quede siempre "arriba" y los otolitos migran hacia el utrículo, donde son inofensivos.</p>
+      <ul>
+        <li><strong>Éxito:</strong> cese del vértigo y nistagmo en las posiciones subsiguientes</li>
+        <li><strong>Repetir</strong> si persiste el nistagmo en la maniobra de Dix-Hallpike post-Epley</li>
+        <li><strong>Si persiste:</strong> derivar a otorrino (posible cúpulolitiasis o canal equivocado)</li>
+      </ul>
+    </div>
+    <div class="alert warning"><div class="alert-icon">⚠️</div><div><strong>Contraindicaciones relativas:</strong> estenosis carotídea severa, inestabilidad cervical (artritis reumatoide, Down), fractura cervical reciente. Evaluar caso a caso.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Maniobra de McClure (Prueba de rotación de cabeza) <span class="badge badge-blue">Diagnóstica</span></div>
+    <div class="sub-h">¿Para qué sirve?</div>
+    <p>Diagnostica el <strong>VPPB del canal semicircular horizontal (lateral)</strong> (5–10% de los VPPB). Se realiza con el paciente en decúbito supino con la cabeza elevada 30° (para alinear el CSC lateral con el plano horizontal).</p>
+    <div class="sub-h">Cómo realizarla</div>
+    <div class="maniobra-step"><div class="man-num">1</div><div class="man-text">Paciente en decúbito supino. Elevar la cabeza 30° (para alinear CSC horizontal). Posición inicial: cara mirando al techo.</div></div>
+    <div class="maniobra-step"><div class="man-num">2</div><div class="man-text">Girar la cabeza <strong>90° hacia la derecha</strong> (cara mirando a la derecha). Esperar 30 seg observando los ojos.</div></div>
+    <div class="maniobra-step"><div class="man-num">3</div><div class="man-text">Volver al centro, luego girar <strong>90° hacia la izquierda</strong>. Esperar 30 seg.</div></div>
+    <div class="info-block blue">
+      <h4>Interpretación</h4>
+      <ul>
+        <li><strong>Canalolitiasis:</strong> nistagmo horizontal geotrópico (hacia el suelo), más intenso cuando la cabeza mira al lado del canal afectado. Con latencia, se agota.</li>
+        <li><strong>Cúpulolitiasis:</strong> nistagmo horizontal apogeotrópico (hacia el techo), sin latencia, no se agota, puede durar &gt;1 min.</li>
+        <li>El lado con el nistagmo más intenso corresponde al canal afectado (en canalolitiasis).</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========================= ALGORITMOS ========================= -->
+<div id="algoritmos" class="section">
+  <div class="section-title">Algoritmos Diagnósticos y Terapéuticos</div>
+  <div class="section-sub">Resumen visual de los principales algoritmos del libro</div>
+
+  <div class="card">
+    <div class="card-title">Diagnóstico Diferencial de Otitis <span class="badge badge-amber">Clave</span></div>
+    <table class="cmp-table">
+      <tr><th></th><th>Otitis Externa</th><th>OMA</th><th>OME</th><th>OMC</th></tr>
+      <tr><td><strong>Dolor</strong></td><td>Sí (tracción pabellón)</td><td>Sí (otalgia aguda)</td><td>Leve o ausente</td><td>No o leve</td></tr>
+      <tr><td><strong>Fiebre</strong></td><td>A veces</td><td>Sí</td><td>No</td><td>Solo en reagudización</td></tr>
+      <tr><td><strong>Otorrea</strong></td><td>Sí (CAE)</td><td>Si hay perforación</td><td>No</td><td>Sí, crónica</td></tr>
+      <tr><td><strong>Membrana</strong></td><td>Normal (si visible)</td><td>Abombada, hiperemia</td><td>Opaca, ambarinada</td><td>Perforada</td></tr>
+      <tr><td><strong>Hipoacusia</strong></td><td>Leve si oclusión CAE</td><td>Leve</td><td>Moderada conductiva</td><td>Progresiva</td></tr>
+      <tr><td><strong>CAE</strong></td><td>Eritematoso, edema</td><td>Normal</td><td>Normal</td><td>Otorrea</td></tr>
+      <tr><td><strong>Signo clave</strong></td><td>Dolor a tracción del pabellón</td><td>Abombamiento</td><td>Timpanograma B</td><td>Perforación + otorrea crónica indolora</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Diagnóstico Diferencial de Vértigo <span class="badge badge-blue">Resumen</span></div>
+    <table class="cmp-table">
+      <tr><th></th><th>VPPB</th><th>Neuronitis vestibular</th><th>Ménière</th><th>ACV</th></tr>
+      <tr><td><strong>Duración</strong></td><td>Seg – &lt;1 min</td><td>Días</td><td>20 min – 12 h</td><td>Variable</td></tr>
+      <tr><td><strong>Gatillante</strong></td><td>Sí (posicional)</td><td>No</td><td>No</td><td>No</td></tr>
+      <tr><td><strong>Hipoacusia</strong></td><td>No</td><td>No</td><td>Sí, fluctuante</td><td>Posible</td></tr>
+      <tr><td><strong>Tinnitus</strong></td><td>No</td><td>No</td><td>Sí</td><td>No</td></tr>
+      <tr><td><strong>HIT</strong></td><td>Normal</td><td>Positivo (lado afectado)</td><td>Normal entre crisis</td><td>Normal (peligroso)</td></tr>
+      <tr><td><strong>Nistagmo</strong></td><td>Posicional geotrópico-torsional</td><td>Horizontal espontáneo, unidireccional</td><td>Horizontal durante crisis</td><td>Vertical / multidireccional</td></tr>
+      <tr><td><strong>Tratamiento</strong></td><td>Epley</td><td>Difenidol + rehabilitación</td><td>Betahistina + dieta</td><td>URGENCIA vascular</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Algoritmo Global — Otalgia <span class="badge badge-amber">APS</span></div>
+    <div class="algo">
+      <div class="algo-title">Otalgia — Enfrentamiento</div>
+      <div class="algo-step"><div class="step-num">1</div><div class="step-content"><strong>Anamnesis:</strong> inicio, duración, unilateral/bilateral, fiebre, otorrea, hipoacusia, tracción del pabellón, síntomas acompañantes</div></div>
+      <div class="algo-arrow">↓</div>
+      <div class="algo-step"><div class="step-num">2</div><div class="step-content"><strong>Otoscopía</strong></div></div>
+      <div class="algo-arrow">↓</div>
+      <div class="decision-box"><strong>CAE eritematoso/edematoso + dolor a tracción pabellón</strong> → Otitis Externa → Gotas otic con cipro+dexametasona</div>
+      <div class="decision-box"><strong>Membrana abombada + fiebre</strong> → OMA → Analgesia ± ATB según criterios</div>
+      <div class="decision-box"><strong>Membrana opaca/ambarinada, sin fiebre</strong> → OME → Observación → Timpanometría</div>
+      <div class="decision-box"><strong>Perforación + otorrea crónica</strong> → OMC → ATB tópico + derivar a ORL</div>
+      <div class="decision-box"><strong>Membrana normal + otalgia</strong> → Otalgia referida (trigeminal, glosofaríngeo, vago): evaluar dientes, ATM, faringe, laringe</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Algoritmo — Disfonía en APS <span class="badge badge-blue">Laringe</span></div>
+    <div class="algo">
+      <div class="algo-title">Disfonía (Adaptado del libro)</div>
+      <div class="decision-box"><strong>Disfonía con factores de riesgo (tabaco, alcohol) o síntomas de alarma (otalgia unilateral, disfagia, estridor, hemoptisis, baja de peso)</strong> → <span style="color:var(--red)">Derivación INMEDIATA a ORL</span></div>
+      <div class="algo-arrow">↓ Sin factores de riesgo</div>
+      <div class="algo-step"><div class="step-num">1</div><div class="step-content">Medidas generales: reposo vocal, hidratación, evitar irritantes, cese tabaco. Reevaluar en 1–3 meses.</div></div>
+      <div class="algo-arrow">↓</div>
+      <div class="decision-box"><strong>¿Resuelve?</strong> → Alta</div>
+      <div class="decision-box"><strong>¿Persiste?</strong> → Derivación a ORL para laringoscopía</div>
+      <div class="algo-arrow">↓</div>
+      <div class="algo-step"><div class="step-num">2</div><div class="step-content">NO indicar antibióticos ni corticoides sistémicos de rutina para disfonía. Medicamentos antirreflujo solo si hay síntomas o signos de RFL.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Signos de Alarma — No perder <span class="badge badge-red">Urgentes</span></div>
+    <div class="grid2">
+      <div class="info-block red">
+        <h4>Derivar URGENTE a ORL o Urgencias</h4>
+        <ul>
+          <li>Epiglotitis: trípode + babeo + fiebre brusca → asegurar VA antes de todo</li>
+          <li>Parálisis facial + otorrea → complicación OMC/colesteatoma</li>
+          <li>Mastoiditis: dolor + edema retroauricular + pabellón desplazado</li>
+          <li>Hipoacusia súbita unilateral: &lt;72h → corticoides urgente</li>
+          <li>Epistaxis con compromiso hemodinámico</li>
+          <li>RSA con edema orbitario o meningismo</li>
+          <li>Vértigo agudo + "Deadly Ds" (diplopia, disartria, disfagia) → ACV</li>
+        </ul>
+      </div>
+      <div class="info-block amber">
+        <h4>No perder en consulta</h4>
+        <ul>
+          <li>Masa cervical en adulto &gt;40 años = cáncer hasta descartar</li>
+          <li>Disfonía &gt;2 semanas en fumador = laringoscopía</li>
+          <li>OME unilateral en adulto = descartar tumor rinofaríngeo</li>
+          <li>Otorrea fétida crónica = colesteatoma (destruye hueso)</li>
+          <li>Epistaxis recurrente en adolescente masculino = fibroangioma nasofaríngeo</li>
+          <li>Otalgia unilateral referida con examen otoscópico normal = cáncer orofaríngeo/laríngeo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
